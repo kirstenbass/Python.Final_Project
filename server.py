@@ -27,7 +27,7 @@ def emo_detector():
     fear = dominant_emotion['fear']
     joy = dominant_emotion['joy']
     sad = dominant_emotion['sadness']
-    max_emotion = max(dominant_emotion.items(), key=lambda x: x[1])
+    max_emotion = dominant_emotion['max_emotion']
     return (f"For the given statement, the system response is "
             f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, 'joy': {joy}, "
             f"'sadness': {sad}. "
@@ -41,4 +41,4 @@ def render_index_page():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=6000)
