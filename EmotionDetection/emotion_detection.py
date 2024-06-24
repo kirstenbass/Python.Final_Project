@@ -6,19 +6,19 @@ def emotion_detector(text_to_analyze):
     myobj = { "raw_document": { "text": text_to_analyze } }
     response = requests.post(url, json = myobj, headers = header)
     formatted_response = json.loads(response.text)
-    print (formatted_response)
+    #print (formatted_response)
 
     if response.status_code == 200:
         emotion = formatted_response['emotionPredictions'][0]['emotion']
-        #max_emotion = max(emotion.items(), key=lambda x : x[1])
+        emotion['max_emotion'] = max(emotion.items(), key=lambda x : x[1])
         return emotion
-    if response is None:
+    if response.status_code == 400:
         noemotion = {'anger': None, 
             'disgust': None, 
             'fear': None, 
             'joy': None, 
-            'sadness': None}
+            'sadness': None,
+            'max_emotion': None}
         return noemotion
     else:
         return None
-      
